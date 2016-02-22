@@ -78,7 +78,8 @@ with tf.Session() as sess:
     finally:
         # When done, ask the threads to stop.
         image_container = format_image(image_container)
-        match_label_with_images(label_container, image_container)
+        train = match_label_with_images(label_container, image_container)
+        print len(train)
         coord.request_stop()
     # Shutdown the queue coordinator.
     # coord.request_stop()
