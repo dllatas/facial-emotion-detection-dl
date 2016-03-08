@@ -2,10 +2,12 @@ import tensorflow as tf
 import os
 
 # Define paths to load labels and images
-labelPath = "/home/neo/projects/deepLearning/data/labelTest/"
+# labelPath = "/home/neo/projects/deepLearning/data/labelTest/"
+labelPath = "/home/neo/projects/deepLearning/data/label/"
 labelFormat = "*.txt"
 labelSufix = "_emotion"
-imagePath = "/home/neo/projects/deepLearning/data/imageTest/"
+#imagePath = "/home/neo/projects/deepLearning/data/imageTest/"
+imagePath = "/home/neo/projects/deepLearning/data/image/"
 imageFormat = "*.png"
 
 # Global variables
@@ -45,6 +47,7 @@ def match_label_with_images(label, image):
         for j in xrange(len(image)):
             if label[i][0]==image[j][0]:
                 train.append([image[j][0], label[i][1], image[j][1]])
+                break
     return train
 
 # Graph execution
@@ -74,12 +77,12 @@ with tf.Session() as sess:
             imageTensor = sess.run([imageKey, imageDecode])
             image_container.append([imageTensor[0],imageTensor[1]])
     except tf.errors.OutOfRangeError:
-        print('Done with the image queue')
+        pass
+        # print('Done with the image queue')
     finally:
         # When done, ask the threads to stop.
         image_container = format_image(image_container)
         train = match_label_with_images(label_container, image_container)
-        print len(train)
         coord.request_stop()
     # Shutdown the queue coordinator.
     # coord.request_stop()
