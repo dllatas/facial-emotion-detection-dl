@@ -11,11 +11,48 @@ IMAGE_FORMAT = "*.png"
 CHAR_COLON = ":"
 NUM_EPOCHS = 1
 NUM_EXAMPLES_PER_EPOCH_FOR_TRAIN = 50000
-
+LABEL = []
 
 # Basic model parameters.
 FLAGS = tf.app.flags.FLAGS
 tf.app.flags.DEFINE_integer('batch_size', 128, """Number of images to process in a batch.""")
+
+def search_label(filename):
+    for lab in LABEL:
+        if lab[0] == filename:
+            return lab[1]
+
+def format_image2(image):
+    with tf.Session() as sess:
+        # Initialize the variables define ("Read more about it !!")
+        tf.initialize_all_variables().run()
+        # Start to populate the label queue
+        coord = tf.train.Coordinator()
+        threads = tf.train.start_queue_runners(coord=coord)
+        # Execute the image section of the graph
+        # Use the Save the labels on a variables
+        imageTensor = sess.run([image])
+        key = imageTensor[0]
+        # Shutdown the queue coordinator.
+        coord.request_stop()
+        coord.join(threads)
+        print "========"
+        print key
+        return key
+    # with tf.Session() as sess:
+        # image = sess.run(image)
+        # print image
+        # return image[len(IMAGE_PATH):-len(IMAGE_FORMAT)+1]
+
+def format_label2(label):
+    return label[:-(len(LABEL_SUFIX)+len(LABEL_FORMAT)-1)]
+
+def generate_label_dict():
+    for root, dirs, files in os.walk(LABEL_PATH, True):
+        for name in files:
+            f = open(os.path.join(root, name), 'r')
+            LABEL.append([format_label2(name), int(float(f.read()))])
+    return LABEL
 
 def format_label(label):
     labelResult = []
@@ -105,24 +142,42 @@ def distort_input(record):
         # Apply whitening
         label.append(record[i][1])
         image.append(record[i][2])
+
     label = tf.pack(label, name="label")
     image = tf.pack(image, name="image")
+
     return label, image
 
-def read_input(label_queue, image_queue):
+# def read_input(label_queue, image_queue):
+def read_input(image_queue):
     # Read the labels
-    labelReader = tf.TextLineReader()
-    label_key, label_value = labelReader.read(label_queue)
-    # Read the labels and generate the decode from PNG image
+    # labelReader = tf.TextLineReader()
+    # label_key, label_value = labelReader.read(label_queue)
+    # label_value = tf.cast(label_value, tf.int32)
+    # Read the images and generate the decode from PNG image
     imageReader = tf.WholeFileReader()
     image_key, image_value = imageReader.read(image_queue)
     image_decode = tf.image.decode_png(image_value)
+    image_decode = tf.cast(image_decode, tf.float32)
     # Preprocess data
-    record = process_input(label_key, label_value, image_key, image_decode)
-    label, image = distort_input(record)
-    return generate_train_batch(label, image)
+    image_key = format_image2(image_key)
+    label = search_label(image_key)
+    # CREATE OBJECT
+    class Record(object):
+        pass
+    record = Record()
+    # Instantiate object
+    record.key = image_key
+    record.label = tf.cast(label, tf.int32)
+    record.image = image_decode
+    # record = process_input(label_key, label_value, image_key, image_decode)
+    # label, image = distort_input(record)
+    # return generate_train_batch(label, image)
+    print record
+    return record
 
 def get_input(label_path, label_format, image_path, image_format):
-    label_queue = tf.train.string_input_producer(tf.train.match_filenames_once(os.path.join(label_path, label_format)), num_epochs=NUM_EPOCHS)
+    # label_queue = tf.train.string_input_producer(tf.train.match_filenames_once(os.path.join(label_path, label_format)), num_epochs=NUM_EPOCHS)
+    generate_label_dict()
     image_queue = tf.train.string_input_producer(tf.train.match_filenames_once(os.path.join(image_path, image_format)), num_epochs=NUM_EPOCHS)
-    return read_input(label_queue, image_queue)
+    return read_input(image_queue)
