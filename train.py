@@ -1,5 +1,6 @@
 import tensorflow as tf
 import input
+import model
 
 
 # Global constants describing the CIFAR-10 data set.
@@ -11,7 +12,10 @@ IMAGE_FORMAT = input.IMAGE_FORMAT
 
 def train():
     with tf.Graph().as_default():
-        input.get_input(LABEL_PATH, LABEL_FORMAT, IMAGE_PATH, IMAGE_FORMAT)
+        global_step = tf.Variable(0, trainable=False)
+        image, label = input.get_input(LABEL_PATH, LABEL_FORMAT, IMAGE_PATH, IMAGE_FORMAT)
+        logits = model.inference(image)
+
 
 def main(argv=None):
     train()

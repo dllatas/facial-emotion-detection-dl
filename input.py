@@ -98,16 +98,16 @@ def distort_input(record):
     for i in xrange(len(record)):
         record[i][1] = tf.cast(record[i][1], tf.int32)
         record[i][2] = tf.cast(record[i][2], tf.float32)
-        label.append(record[i][1])
-        image.append(record[i][2])
         # Crop image
         # Flip left to right
         # Modify brightness
         # Modify contrast
         # Apply whitening
+        label.append(record[i][1])
+        image.append(record[i][2])
     label = tf.pack(label, name="label")
     image = tf.pack(image, name="image")
-    return generate_train_batch(label, image)
+    return label, image
 
 def read_input(label_queue, image_queue):
     # Read the labels
@@ -119,10 +119,10 @@ def read_input(label_queue, image_queue):
     image_decode = tf.image.decode_png(image_value)
     # Preprocess data
     record = process_input(label_key, label_value, image_key, image_decode)
-    distorted_record = distort_input(record)
-    return distorted_record
+    label, image = distort_input(record)
+    return generate_train_batch(label, image)
 
 def get_input(label_path, label_format, image_path, image_format):
     label_queue = tf.train.string_input_producer(tf.train.match_filenames_once(os.path.join(label_path, label_format)), num_epochs=NUM_EPOCHS)
     image_queue = tf.train.string_input_producer(tf.train.match_filenames_once(os.path.join(image_path, image_format)), num_epochs=NUM_EPOCHS)
-    read_input(label_queue, image_queue)
+    return read_input(label_queue, image_queue)
