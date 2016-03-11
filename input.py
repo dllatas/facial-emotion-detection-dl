@@ -12,6 +12,7 @@ CHAR_COLON = ":"
 NUM_EPOCHS = 1
 NUM_EXAMPLES_PER_EPOCH_FOR_TRAIN = 50000
 LABEL = []
+NUM_CLASSES = 7
 
 # Basic model parameters.
 FLAGS = tf.app.flags.FLAGS
@@ -21,6 +22,9 @@ def search_label(filename):
     for lab in LABEL:
         if lab[0] == filename:
             return lab[1]
+
+def format_image3(image):
+    return image[len(IMAGE_PATH):-len(IMAGE_FORMAT)+1]
 
 def format_image2(image):
     with tf.Session() as sess:
@@ -36,9 +40,7 @@ def format_image2(image):
         # Shutdown the queue coordinator.
         coord.request_stop()
         coord.join(threads)
-        print "========"
-        print key
-        return key
+        return format_image3(key)
     # with tf.Session() as sess:
         # image = sess.run(image)
         # print image
@@ -116,6 +118,9 @@ def process_input(label_key, label_value, image_key, image_decode):
         return train
 
 def generate_train_batch(label, image, batch_size=FLAGS.batch_size):
+    print "==========="
+    print label, image
+    print "==========="
     num_preprocess_threads = 16
     min_fraction_of_examples_in_queue = 0.4
     min_queue_examples = int(NUM_EXAMPLES_PER_EPOCH_FOR_TRAIN * min_fraction_of_examples_in_queue)
@@ -157,7 +162,7 @@ def read_input(image_queue):
     # Read the images and generate the decode from PNG image
     imageReader = tf.WholeFileReader()
     image_key, image_value = imageReader.read(image_queue)
-    image_decode = tf.image.decode_png(image_value)
+    image_decode = tf.image.decode_png(image_value, channels=1)
     image_decode = tf.cast(image_decode, tf.float32)
     # Preprocess data
     image_key = format_image2(image_key)
@@ -170,11 +175,28 @@ def read_input(image_queue):
     record.key = image_key
     record.label = tf.cast(label, tf.int32)
     record.image = image_decode
+    # PROCESSING IMAGES
+    # reshaped_image = tf.cast(record.image, tf.float32)
+    height = 245
+    width = 320
+    # Image processing for training the network. Note the many random distortions applied to the image.
+    # Randomly crop a [height, width] section of the image.
+    print "================================"
+    print record.image
+    print "================================"
+    distorted_image = tf.image.random_crop(record.image, [height, width])
+    # Randomly flip the image horizontally.
+    distorted_image = tf.image.random_flip_left_right(distorted_image)
+    # Because these operations are not commutative, consider randomizing randomize the order their operation.
+    distorted_image = tf.image.random_brightness(distorted_image, max_delta=63)
+    distorted_image = tf.image.random_contrast(distorted_image, lower=0.2, upper=1.8)
+    # Subtract off the mean and divide by the variance of the pixels.
+    float_image = tf.image.per_image_whitening(distorted_image)
     # record = process_input(label_key, label_value, image_key, image_decode)
     # label, image = distort_input(record)
-    # return generate_train_batch(label, image)
-    print record
-    return record
+    return generate_train_batch(record.label, float_image)
+    # return generate_train_batch(record.label, record.image)
+    # return record
 
 def get_input(label_path, label_format, image_path, image_format):
     # label_queue = tf.train.string_input_producer(tf.train.match_filenames_once(os.path.join(label_path, label_format)), num_epochs=NUM_EPOCHS)
