@@ -3,20 +3,28 @@ import os
 
 LABEL_PATH = "/home/neo/projects/deepLearning/data/labelTest/"
 IMAGE_PATH = "/home/neo/projects/deepLearning/data/imageTest/"
-
 LABEL_SUFIX = "_emotion"
 LABEL_FORMAT = "*.txt"
 IMAGE_FORMAT = "*.png"
-
 CHAR_COLON = ":"
 NUM_EPOCHS = 1
-NUM_EXAMPLES_PER_EPOCH_FOR_TRAIN = 50000
 LABEL = []
+
+NUM_EXAMPLES_PER_EPOCH_FOR_TRAIN = 50000
+NUM_EPOCHS_PER_DECAY = 350.0
 NUM_CLASSES = 7
+INITIAL_LEARNING_RATE = 0.1
+LEARNING_RATE_DECAY_FACTOR = 0.1
+MOVING_AVERAGE_DECAY = 0.9999
 
 # Basic model parameters.
 FLAGS = tf.app.flags.FLAGS
 tf.app.flags.DEFINE_integer('batch_size', 128, """Number of images to process in a batch.""")
+tf.app.flags.DEFINE_boolean('log_device_placement', False, """Whether to log device placement.""")
+tf.app.flags.DEFINE_string('train_dir', '/home/neo/projects/deepLearning/log', """Directory where to write event logs and checkpoint.""")
+# tf.app.flags.DEFINE_integer('max_steps', 1000000, """Number of batches to run.""")
+tf.app.flags.DEFINE_integer('max_steps', 1000, """Number of batches to run.""")
+
 
 def search_label(filename):
     for lab in LABEL:
@@ -27,7 +35,7 @@ def format_image3(image):
     return image[len(IMAGE_PATH):-len(IMAGE_FORMAT)+1]
 
 def format_image2(image):
-    with tf.Session() as sess:
+    with tf.Session() as ppro:
         # Initialize the variables define ("Read more about it !!")
         tf.initialize_all_variables().run()
         # Start to populate the label queue
@@ -35,7 +43,7 @@ def format_image2(image):
         threads = tf.train.start_queue_runners(coord=coord)
         # Execute the image section of the graph
         # Use the Save the labels on a variables
-        imageTensor = sess.run([image])
+        imageTensor = ppro.run([image])
         key = imageTensor[0]
         # Shutdown the queue coordinator.
         coord.request_stop()
@@ -181,10 +189,7 @@ def read_input(image_queue):
     width = 320
     # Image processing for training the network. Note the many random distortions applied to the image.
     # Randomly crop a [height, width] section of the image.
-    print "================================"
-    print record.image
-    print "================================"
-    distorted_image = tf.image.random_crop(record.image, [height, width])
+    distorted_image = tf.random_crop(record.image, [height, width, 1])
     # Randomly flip the image horizontally.
     distorted_image = tf.image.random_flip_left_right(distorted_image)
     # Because these operations are not commutative, consider randomizing randomize the order their operation.
