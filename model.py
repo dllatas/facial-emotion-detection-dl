@@ -6,8 +6,9 @@ import input
 # tf.app.flags.DEFINE_integer('batch_size', 128, """Number of images to process in a batch.""")
 
 def gather_summary(x):
-    tf.histogram_summary('/activations', x)
-    tf.scalar_summary('/sparsity', tf.nn.zero_fraction(x))
+    tensor_name = x.op.name
+    tf.histogram_summary(tensor_name + '/activations', x)
+    tf.scalar_summary(tensor_name + '/sparsity', tf.nn.zero_fraction(x))
 
 def set_variable(name, shape, initializer):
      var = tf.get_variable(name, shape, initializer=initializer)

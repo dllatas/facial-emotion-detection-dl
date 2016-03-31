@@ -22,7 +22,7 @@ MOVING_AVERAGE_DECAY = 0.9999
 # Basic model parameters.
 FLAGS = tf.app.flags.FLAGS
 # tf.app.flags.DEFINE_integer('batch_size', 128, """Number of images to process in a batch.""")
-tf.app.flags.DEFINE_integer('batch_size', 4, """Number of images to process in a batch.""")
+tf.app.flags.DEFINE_integer('batch_size', 2, """Number of images to process in a batch.""")
 tf.app.flags.DEFINE_boolean('log_device_placement', False, """Whether to log device placement.""")
 tf.app.flags.DEFINE_string('train_dir', '/home/neo/projects/deepLearning/log', """Directory where to write event logs and checkpoint.""")
 # tf.app.flags.DEFINE_integer('max_steps', 1000000, """Number of batches to run.""")
@@ -135,8 +135,10 @@ def generate_train_batch(label, image, batch_size=FLAGS.batch_size):
         [image, label],
         batch_size=batch_size,
         num_threads=num_preprocess_threads,
-        capacity=min_queue_examples + 3 * batch_size,
-        min_after_dequeue=min_queue_examples
+        # capacity=min_queue_examples + 3 * batch_size,
+        capacity=4,
+        # min_after_dequeue=min_queue_examples
+        min_after_dequeue=1
         )
     tf.image_summary('images', images)
     return images, tf.reshape(label_batch, [batch_size])
