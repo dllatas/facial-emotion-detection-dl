@@ -1,5 +1,7 @@
 import tensorflow as tf
 import numpy as np
+import os
+from datetime import datetime
 import time
 import input
 import model
@@ -10,6 +12,7 @@ IMAGE_PATH = input.IMAGE_PATH
 LABEL_SUFIX = input.LABEL_SUFIX
 LABEL_FORMAT = input.LABEL_FORMAT
 IMAGE_FORMAT = input.IMAGE_FORMAT
+
 
 def train():
     with tf.Graph().as_default():

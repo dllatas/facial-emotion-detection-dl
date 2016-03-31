@@ -10,8 +10,10 @@ CHAR_COLON = ":"
 NUM_EPOCHS = 1
 LABEL = []
 
-NUM_EXAMPLES_PER_EPOCH_FOR_TRAIN = 50000
-NUM_EPOCHS_PER_DECAY = 350.0
+#NUM_EXAMPLES_PER_EPOCH_FOR_TRAIN = 50000
+NUM_EXAMPLES_PER_EPOCH_FOR_TRAIN = 4
+#NUM_EPOCHS_PER_DECAY = 350.0
+NUM_EPOCHS_PER_DECAY = 2.0
 NUM_CLASSES = 7
 INITIAL_LEARNING_RATE = 0.1
 LEARNING_RATE_DECAY_FACTOR = 0.1
@@ -19,12 +21,12 @@ MOVING_AVERAGE_DECAY = 0.9999
 
 # Basic model parameters.
 FLAGS = tf.app.flags.FLAGS
-tf.app.flags.DEFINE_integer('batch_size', 128, """Number of images to process in a batch.""")
+# tf.app.flags.DEFINE_integer('batch_size', 128, """Number of images to process in a batch.""")
+tf.app.flags.DEFINE_integer('batch_size', 4, """Number of images to process in a batch.""")
 tf.app.flags.DEFINE_boolean('log_device_placement', False, """Whether to log device placement.""")
 tf.app.flags.DEFINE_string('train_dir', '/home/neo/projects/deepLearning/log', """Directory where to write event logs and checkpoint.""")
 # tf.app.flags.DEFINE_integer('max_steps', 1000000, """Number of batches to run.""")
 tf.app.flags.DEFINE_integer('max_steps', 1000, """Number of batches to run.""")
-
 
 def search_label(filename):
     for lab in LABEL:
@@ -126,11 +128,8 @@ def process_input(label_key, label_value, image_key, image_decode):
         return train
 
 def generate_train_batch(label, image, batch_size=FLAGS.batch_size):
-    print "==========="
-    print label, image
-    print "==========="
-    num_preprocess_threads = 16
-    min_fraction_of_examples_in_queue = 0.4
+    num_preprocess_threads = 1
+    min_fraction_of_examples_in_queue = 0.5
     min_queue_examples = int(NUM_EXAMPLES_PER_EPOCH_FOR_TRAIN * min_fraction_of_examples_in_queue)
     images, label_batch = tf.train.shuffle_batch(
         [image, label],
@@ -185,8 +184,10 @@ def read_input(image_queue):
     record.image = image_decode
     # PROCESSING IMAGES
     # reshaped_image = tf.cast(record.image, tf.float32)
-    height = 245
-    width = 320
+    # height = 245
+    # width = 320
+    height = 32
+    width = 32
     # Image processing for training the network. Note the many random distortions applied to the image.
     # Randomly crop a [height, width] section of the image.
     distorted_image = tf.random_crop(record.image, [height, width, 1])

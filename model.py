@@ -23,9 +23,6 @@ def set_weight_variable(name, shape, stddev, wd):
 def inference(images):
     with tf.variable_scope('conv1') as scope:
         kernel = set_weight_variable('weights', shape=[5, 5, 1, 64], stddev=1e-4, wd=0.0)
-        print "=========="
-        print images
-        print "=========="
         conv = tf.nn.conv2d(images, kernel, [1, 1, 1, 1], padding='SAME')
         biases = set_variable('biases', [64], tf.constant_initializer(0.0))
         bias = tf.nn.bias_add(conv, biases)
@@ -33,7 +30,7 @@ def inference(images):
         gather_summary(conv1)
 
     pool1 = tf.nn.max_pool(conv1, ksize=[1, 3, 3, 1], strides=[1, 2, 2, 1], padding='SAME', name='pool1')
-    norm1 = tf.nn.lrn(pool1, 4, bias=1.0, alpha=0.001 / 9.0, beta=0.75, name='norm1')
+    norm1 = tf.nn.local_response_normalization(pool1, 4, bias=1.0, alpha=0.001 / 9.0, beta=0.75, name='norm1')
 
     with tf.variable_scope('conv2') as scope:
         kernel = set_weight_variable('weights', shape=[5, 5, 64, 64],stddev=1e-4, wd=0.0)
@@ -43,7 +40,7 @@ def inference(images):
         conv2 = tf.nn.relu(bias, name=scope.name)
         gather_summary(conv2)
 
-    norm2 = tf.nn.lrn(conv2, 4, bias=1.0, alpha=0.001 / 9.0, beta=0.75, name='norm2')
+    norm2 = tf.nn.local_response_normalization(conv2, 4, bias=1.0, alpha=0.001 / 9.0, beta=0.75, name='norm2')
     pool2 = tf.nn.max_pool(norm2, ksize=[1, 3, 3, 1], strides=[1, 2, 2, 1], padding='SAME', name='pool2')
 
     with tf.variable_scope('local3') as scope:
