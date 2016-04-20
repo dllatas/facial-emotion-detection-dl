@@ -6,7 +6,7 @@ import time
 import input
 import model
 
-# Global constants describing the CIFAR-10 data set.
+# Global constants
 LABEL_PATH = input.LABEL_PATH
 IMAGE_PATH = input.IMAGE_PATH
 LABEL_SUFIX = input.LABEL_SUFIX
@@ -34,17 +34,17 @@ def train():
             _, loss_value = sess.run([train_op, loss])
             duration = time.time() - start_time
             assert not np.isnan(loss_value), 'Model diverged with loss = NaN'
-            if step % 10 == 0:
+            if step % 1 == 0:
                 num_examples_per_step = input.FLAGS.batch_size
                 examples_per_sec = num_examples_per_step / duration
                 sec_per_batch = float(duration)
                 format_str = ('%s: step %d, loss = %.2f (%.1f examples/sec; %.3f sec/batch)')
                 print (format_str % (datetime.now(), step, loss_value, examples_per_sec, sec_per_batch))
-            if step % 100 == 0:
+            if step % 10 == 0:
                 summary_str = sess.run(summary_op)
                 summary_writer.add_summary(summary_str, step)
             # Save the model checkpoint periodically.
-            if step % 1000 == 0 or (step + 1) == input.FLAGS.max_steps:
+            if step % 25 == 0:
                 checkpoint_path = os.path.join(input.FLAGS.train_dir, 'model.ckpt')
                 saver.save(sess, checkpoint_path, global_step=step)
 

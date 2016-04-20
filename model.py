@@ -1,10 +1,6 @@
 import tensorflow as tf
 import input
 
-# FLAGS = tf.app.flags.FLAGS
-# Basic model parameters.
-# tf.app.flags.DEFINE_integer('batch_size', 128, """Number of images to process in a batch.""")
-
 def gather_summary(x):
     tensor_name = x.op.name
     tf.histogram_summary(tensor_name + '/activations', x)
