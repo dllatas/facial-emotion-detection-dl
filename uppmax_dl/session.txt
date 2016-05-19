@@ -1,0 +1,25 @@
+ssh -X danielll@tintin.uppmax.uu.se
+
+spinetta1cerati2
+
+scp some_local_file danielll@tintin.uppmax.uu.se:/home/username/some-file
+scp danielll@tintin.uppmax.uu.se:/home/username/some-file local_file_or_directory
+
+
+Files to copy:
+
+scp /home/neo/projects/uppmax_dl/cifar10_input.py danielll@tintin.uppmax.uu.se:/home/danielll/deep
+scp /home/neo/projects/uppmax_dl/cifar10.py danielll@tintin.uppmax.uu.se:/home/danielll/deep
+
+scp /home/neo/projects/uppmax_dl/cifar10_train_distributed.py danielll@tintin.uppmax.uu.se:/home/danielll/deep
+scp /home/neo/projects/uppmax_dl/emotion_train.sh danielll@tintin.uppmax.uu.se:/home/danielll/deep
+
+
+Execute the sh file:
+
+sbatch emotion_train.sh
+
+
+Job status:
+
+jobinfo -u danielll
