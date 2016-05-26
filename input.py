@@ -36,8 +36,6 @@ tf.app.flags.DEFINE_integer('num_examples', 1000, """Number of examples to run."
 
 def search_label(filename):
     for lab in LABEL:
-        # if lab[0] == filename:
-        #print lab[0][:8], filename[:8]
         if lab[0][:8] == filename[:8]:
             return lab[1]
 

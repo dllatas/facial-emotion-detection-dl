@@ -70,6 +70,7 @@ def test():
 		image, label = input.get_input(LABEL_PATH, LABEL_FORMAT, IMAGE_PATH, IMAGE_FORMAT)
 		logits = model.inference(image)
 		top_k_op = tf.nn.in_top_k(logits, label, 1)
+		
 		variable_averages = tf.train.ExponentialMovingAverage(MOVING_AVERAGE_DECAY)
 		variables_to_restore = variable_averages.variables_to_restore()
 		saver = tf.train.Saver(variables_to_restore)
