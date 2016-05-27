@@ -39,5 +39,6 @@ scp -i "/home/neo/Downloads/facemotion.pem" ubuntu@ec2-54-237-217-14.compute-1.a
 
 
 10 000 steps = 19.4 %
+20 000 steps = 21.9 %; Top-3 29.1%; Top-4 52.8%; Top-5 75.9% 
 
 

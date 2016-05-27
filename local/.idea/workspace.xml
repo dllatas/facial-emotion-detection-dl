@@ -54,8 +54,8 @@
       <file leaf-file-name="cifar10_eval.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/cifar10_eval.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="307">
-              <caret line="169" column="0" selection-start-line="169" selection-start-column="0" selection-end-line="169" selection-end-column="0" />
+            <state relative-caret-position="195">
+              <caret line="135" column="48" selection-start-line="135" selection-start-column="48" selection-end-line="135" selection-end-column="48" />
               <folding>
                 <element signature="e#1213#1251#0" expanded="true" />
               </folding>
@@ -68,10 +68,10 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/cifar10_eval.py" />
         <option value="$PROJECT_DIR$/cifar10.py" />
         <option value="$PROJECT_DIR$/cifar10_train.py" />
         <option value="$PROJECT_DIR$/cifar10_input.py" />
+        <option value="$PROJECT_DIR$/cifar10_eval.py" />
       </list>
     </option>
   </component>
@@ -655,8 +655,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/cifar10_eval.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="307">
-          <caret line="169" column="0" selection-start-line="169" selection-start-column="0" selection-end-line="169" selection-end-column="0" />
+        <state relative-caret-position="195">
+          <caret line="135" column="48" selection-start-line="135" selection-start-column="48" selection-end-line="135" selection-end-column="48" />
           <folding>
             <element signature="e#1213#1251#0" expanded="true" />
           </folding>
