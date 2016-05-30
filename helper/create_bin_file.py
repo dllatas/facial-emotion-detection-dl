@@ -11,8 +11,7 @@ def crop_image(path, witdh, height):
 			offset_w = (w - witdh) / 2
 			image.crop((0 + offset_w, 0 + offset_h, witdh + offset_w, height + offset_h)).save(os.path.join(root, name))
 
-
-def convert_to_greyscale(path):
+def convert_to_grayscale(path):
 	for root, dirs, files in os.walk(path, True):
 		for name in files:
 			image = Image.open(os.path.join(root, name))
@@ -41,7 +40,7 @@ def generate_label_dictionary(path):
 def set_record_size(label, witdh, height, channel):
 	return label + (witdh * height * channel)
 
-def generate_bin(path, total_images, record_size, label_dict):
+def generate_bin(path, total_images, record_size, label_dict, home_path):
 	result = np.empty([total_images, record_size], dtype=np.uint8)
 	i = 0
 	for root, dirs, files in os.walk(path, True):
@@ -53,22 +52,27 @@ def generate_bin(path, total_images, record_size, label_dict):
 				grey = image_modifed[:].flatten()
 				result[i] = np.array(list([label]) + list(grey), np.uint8)
 				i = i + 1
-	result.tofile("/home/neo/projects/deepLearning/data/kh.bin")
+	result.tofile(home_path)
 
 def main(argv=None):  # pylint: disable=unused-argument
 	label_path = "/home/neo/projects/deepLearning/data/label/"
-	image_path = "/home/neo/projects/deepLearning/data/image/"
+	#image_path = "/home/neo/projects/deepLearning/data/image/"
+	image_path = "/home/neo/projects/deepLearning/data/resize_faces/"
+	home_path = "/home/neo/projects/deepLearning/data/ck.bin"
 	#total_images = 4895
-	total_images = 327
-	witdh = 640
-	height = 480
+	#total_images = 327
+	total_images = 1538
+	#witdh = 640
+	#height = 480
+	witdh = 256
+	height = 256
 	channel = 1
 	label = 1
 	#crop_image(image_path, witdh, height)
-	#convert_to_greyscale(image_path)
+	#convert_to_grayscale(image_path)
 	label_dict = generate_label_dictionary(label_path)
 	record_size = set_record_size(label, witdh, height, channel)
-	generate_bin(image_path, total_images, record_size, label_dict)
+	generate_bin(image_path, total_images, record_size, label_dict, home_path)
 	
 if __name__ == '__main__':
 	main()

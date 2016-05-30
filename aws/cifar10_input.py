@@ -29,9 +29,10 @@ import tensorflow as tf
 # architecture will change and any model would need to be retrained.
 #IMAGE_SIZE = 24
 IMAGE_SIZE = 256
+#IMAGE_SIZE = 290
 
 # Global constants describing the CIFAR-10 data set.
-NUM_CLASSES = 7
+NUM_CLASSES = 6
 #NUM_EXAMPLES_PER_EPOCH_FOR_TRAIN = 50000
 NUM_EXAMPLES_PER_EPOCH_FOR_TRAIN = 10000
 #NUM_EXAMPLES_PER_EPOCH_FOR_EVAL = 10000
@@ -39,6 +40,7 @@ NUM_EXAMPLES_PER_EPOCH_FOR_EVAL = 2000
 
 #PATH = "/home/neo/projects/deepLearning/data/"
 PATH = "/home/ubuntu/dl/data/"
+FILENAME = 'ck.bin'
 
 
 def read_cifar10(filename_queue):
@@ -68,8 +70,8 @@ def read_cifar10(filename_queue):
   # See http://www.cs.toronto.edu/~kriz/cifar.html for a description of the
   # input format.
   label_bytes = 1  # 2 for CIFAR-100
-  result.height = 480
-  result.width = 640
+  result.height = 256
+  result.width = 256
   result.depth = 1
   image_bytes = result.height * result.width * result.depth
   # Every record consists of a label followed by the image, with a
@@ -95,7 +97,6 @@ def read_cifar10(filename_queue):
                            [result.depth, result.height, result.width])
   # Convert from [depth, height, width] to [height, width, depth].
   result.uint8image = tf.transpose(depth_major, [1, 2, 0])
-
   return result
 
 
@@ -115,7 +116,7 @@ def _generate_image_and_label_batch(image, label, min_queue_examples,
   """
   # Create a queue that shuffles the examples, and then
   # read 'batch_size' images + labels from the example queue.
-  num_preprocess_threads = 16
+  num_preprocess_threads = 8
   if shuffle:
     images, label_batch = tf.train.shuffle_batch(
         [image, label],
@@ -151,8 +152,7 @@ def distorted_inputs(data_dir, batch_size):
     if not tf.gfile.Exists(f):
       raise ValueError('Failed to find file: ' + f)
   """
-  path = PATH
-  filenames = [os.path.join(path, 'kh.bin')]
+  filenames = [os.path.join(PATH, FILENAME)]
   # Create a queue that produces the filenames to read.
   filename_queue = tf.train.string_input_producer(filenames)
 
@@ -162,17 +162,11 @@ def distorted_inputs(data_dir, batch_size):
 
   height = IMAGE_SIZE
   width = IMAGE_SIZE
-
   # Image processing for training the network. Note the many random
   # distortions applied to the image.
-
   # Randomly crop a [height, width] section of the image.
-  
-
-  distorted_image = tf.image.resize_image_with_crop_or_pad(reshaped_image,
-                                                         width, height)
-
-  #distorted_image = tf.random_crop(reshaped_image, [height, width, 1])
+  distorted_image = tf.image.resize_image_with_crop_or_pad(reshaped_image, width, height)
+  # distorted_image = tf.random_crop(reshaped_image, [height, width, 1])
 
   # Randomly flip the image horizontally.
   distorted_image = tf.image.random_flip_left_right(distorted_image)
@@ -191,7 +185,7 @@ def distorted_inputs(data_dir, batch_size):
   min_fraction_of_examples_in_queue = 0.4
   min_queue_examples = int(NUM_EXAMPLES_PER_EPOCH_FOR_TRAIN *
                            min_fraction_of_examples_in_queue)
-  print ('Filling queue with %d CIFAR images before starting to train. '
+  print ('Filling queue with %d CK+ images before starting to train. '
          'This will take a few minutes.' % min_queue_examples)
 
   # Generate a batch of images and labels by building up a queue of examples.
@@ -223,8 +217,7 @@ def inputs(eval_data, data_dir, batch_size):
       raise ValueError('Failed to find file: ' + f)
   """
   num_examples_per_epoch = NUM_EXAMPLES_PER_EPOCH_FOR_EVAL
-  path = PATH
-  filenames = [os.path.join(path, 'kh.bin')]
+  filenames = [os.path.join(PATH, FILENAME)]
   # Create a queue that produces the filenames to read.
   filename_queue = tf.train.string_input_producer(filenames)
 
@@ -237,8 +230,7 @@ def inputs(eval_data, data_dir, batch_size):
 
   # Image processing for evaluation.
   # Crop the central [height, width] of the image.
-  resized_image = tf.image.resize_image_with_crop_or_pad(reshaped_image,
-                                                         width, height)
+  resized_image = tf.image.resize_image_with_crop_or_pad(reshaped_image, width, height)
 
   # Subtract off the mean and divide by the variance of the pixels.
   float_image = tf.image.per_image_whitening(resized_image)

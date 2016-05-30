@@ -1,0 +1,49 @@
+import os
+import cv2
+
+# First check how many faces are detected per frame; report when value is different than one
+
+def save_image(image, dest_path, filename):
+	cv2.imwrite(os.path.join(dest_path, filename), image)
+
+def check_number_faces_detected(face, borderline, filename):
+	if len(face) != borderline:
+		print "Faces found: " + str(len(face)) + " on file " + filename
+
+def show_image(image, header="faces"):
+	cv2.imshow(header, image)
+	cv2.waitKey(0)
+
+def crop_image(face, image):
+	for (x, y, w, h) in face:
+		crop_image = image[y:y+h, x:x+w]
+	return crop_image
+
+def draw_rectangle(face, image):
+	for (x, y, w, h) in face:
+		cv2.rectangle(image, (x, y), (x+w, y+h), (0, 255, 0), 2)
+	return image
+
+def get_face(filename, face_cascade):
+	image = cv2.imread(filename)
+	gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+	face = face_cascade.detectMultiScale(gray, scaleFactor=1.2, minNeighbors=7, minSize=(70, 70))
+	return face, image
+
+def get_images(path, face_cascade, dest_path, borderline):
+	for root, dirs, files in os.walk(path, True):
+		for name in files:
+			face = get_face(os.path.join(root, name), face_cascade)
+			check_number_faces_detected(face[0], borderline, os.path.join(root, name))
+			image = crop_image(face[0], face[1])
+			save_image(image, dest_path, name)
+			
+def main(argv=None):  # pylint: disable=unused-argument
+	face_cascade = cv2.CascadeClassifier("/home/neo/opencv-3.1.0/data/haarcascades/haarcascade_frontalface_default.xml")
+	image_path = "/home/neo/projects/deepLearning/data/image_exp2/"
+	dest_path = "/home/neo/projects/deepLearning/data/crop_faces/"
+	borderline = 1
+	get_images(image_path, face_cascade, dest_path, borderline)
+
+if __name__ == '__main__':
+	main()
