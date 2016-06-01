@@ -43,6 +43,7 @@ import tarfile
 
 from six.moves import urllib
 import tensorflow as tf
+import numpy as np
 
 #from tensorflow.models.image.cifar10 import cifar10_input
 import cifar10_input
@@ -64,11 +65,9 @@ NUM_EXAMPLES_PER_EPOCH_FOR_EVAL = cifar10_input.NUM_EXAMPLES_PER_EPOCH_FOR_EVAL
 
 # Constants describing the training process.
 MOVING_AVERAGE_DECAY = 0.9999     # The decay to use for the moving average.
-#NUM_EPOCHS_PER_DECAY = 350.0      # Epochs after which learning rate decays.
-#NUM_EPOCHS_PER_DECAY = 50.0      # Epochs after which learning rate decays.
-NUM_EPOCHS_PER_DECAY = 50.0      # Epochs after which learning rate decays.
-LEARNING_RATE_DECAY_FACTOR = 0.001  # Learning rate decay factor.
-INITIAL_LEARNING_RATE = 0.01       # Initial learning rate.
+NUM_EPOCHS_PER_DECAY = 208.0      # Epochs after which learning rate decays.
+LEARNING_RATE_DECAY_FACTOR = 0.01  # Learning rate decay factor.
+INITIAL_LEARNING_RATE = 0.1       # Initial learning rate.
 
 # If a model is trained with multiple GPU's prefix all Op names with tower_name
 # to differentiate the operations. Note that this prefix is removed from the
@@ -173,7 +172,7 @@ def inputs(eval_data):
                               batch_size=FLAGS.batch_size)
 
 
-def inference(images):
+def inference(images, eval=False):
   """Build the CIFAR-10 model.
 
   Args:
@@ -207,38 +206,21 @@ def inference(images):
   pool2 = tf.nn.max_pool(conv2, ksize=[1, 2, 2, 1],
                          strides=[1, 2, 2, 1], padding='SAME', name='pool2')
 
-  with tf.variable_scope('conv3') as scope:
-    kernel = _variable_with_weight_decay('weights', shape=[3, 3, 128, 256],   # 256 + 128 = 384
-                                         stddev=1e-4, wd=0.0)
-    conv = tf.nn.conv2d(pool2, kernel, [1, 1, 1, 1], padding='SAME')
-    biases = _variable_on_cpu('biases', [256], tf.constant_initializer(0.1))
-    bias = tf.nn.bias_add(conv, biases)
-    conv3 = tf.nn.relu(bias, name=scope.name)
-    _activation_summary(conv3)
-
-  pool3 = tf.nn.max_pool(conv3, ksize=[1, 2, 2, 1],
-                         strides=[1, 2, 2, 1], padding='SAME', name='pool3')
   # local3
   with tf.variable_scope('local1') as scope:
     # Move everything into depth so we can perform a single matrix multiply.
     dim = 1
-    for d in pool3.get_shape()[1:].as_list():
+    for d in pool2.get_shape()[1:].as_list():
       dim *= d
-    reshape = tf.reshape(pool3, [FLAGS.batch_size, dim])
+    reshape = tf.reshape(pool2, [FLAGS.batch_size, dim])
     weights = _variable_with_weight_decay('weights', shape=[dim, 256],
                                           stddev=0.04, wd=0.004)
     biases = _variable_on_cpu('biases', [256], tf.constant_initializer(0.1))
     local1 = tf.nn.relu(tf.matmul(reshape, weights) + biases, name=scope.name)
     _activation_summary(local1)
-
-  """
-  with tf.variable_scope('local2') as scope:
-    weights = _variable_with_weight_decay('weights', shape=[256, NUM_CLASSES],
-                                          stddev=0.04, wd=0.004)
-    biases = _variable_on_cpu('biases', [NUM_CLASSES], tf.constant_initializer(0.1))
-    local2 = tf.nn.relu(tf.matmul(local1, weights) + biases, name=scope.name)
-    _activation_summary(local2)
-  """
+    if eval is False:
+      local_drop_1 = tf.nn.dropout(local1, 0.7)
+      _activation_summary(local_drop_1)
 
   # softmax, i.e. softmax(WX + b)
   with tf.variable_scope('softmax_linear') as scope:
@@ -246,7 +228,10 @@ def inference(images):
                                           stddev=1/192.0, wd=0.0)
     biases = _variable_on_cpu('biases', [NUM_CLASSES],
                               tf.constant_initializer(0.0))
-    softmax_linear = tf.add(tf.matmul(local1, weights), biases, name=scope.name)
+    if eval is False:
+      softmax_linear = tf.nn.softmax(tf.matmul(local_drop_1, weights) + biases, name=scope.name)
+    else:
+      softmax_linear = tf.nn.softmax(tf.matmul(local1, weights) + biases, name=scope.name)
     _activation_summary(softmax_linear)
 
   return softmax_linear
@@ -358,21 +343,3 @@ def train(total_loss, global_step):
 
   return train_op
 
-def maybe_download_and_extract():
-  """Download and extract the tarball from Alex's website."""
-  dest_directory = FLAGS.data_dir
-  if not os.path.exists(dest_directory):
-    os.makedirs(dest_directory)
-  filename = DATA_URL.split('/')[-1]
-  filepath = os.path.join(dest_directory, filename)
-  if not os.path.exists(filepath):
-    def _progress(count, block_size, total_size):
-      sys.stdout.write('\r>> Downloading %s %.1f%%' % (filename,
-          float(count * block_size) / float(total_size) * 100.0))
-      sys.stdout.flush()
-    filepath, _ = urllib.request.urlretrieve(DATA_URL, filepath,
-                                             reporthook=_progress)
-    print()
-    statinfo = os.stat(filepath)
-    print('Successfully downloaded', filename, statinfo.st_size, 'bytes.')
-    tarfile.open(filepath, 'r:gz').extractall(dest_directory)

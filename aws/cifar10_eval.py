@@ -56,7 +56,7 @@ tf.app.flags.DEFINE_string('checkpoint_dir', '/tmp/cifar10_train',
 tf.app.flags.DEFINE_integer('eval_interval_secs', 60 * 5,
                             """How often to run the eval.""")
 #tf.app.flags.DEFINE_integer('num_examples', 10000,
-tf.app.flags.DEFINE_integer('num_examples', 5000,
+tf.app.flags.DEFINE_integer('num_examples', 320,
                             """Number of examples to run.""")
 tf.app.flags.DEFINE_boolean('run_once', True,
                          """Whether to run eval only once.""")
@@ -130,10 +130,10 @@ def evaluate():
 
     # Build a Graph that computes the logits predictions from the
     # inference model.
-    logits = cifar10.inference(images)
+    logits = cifar10.inference(images, eval=True)
 
     # Calculate predictions.
-    top_k_op = tf.nn.in_top_k(logits, labels, 1)
+    top_k_op = tf.nn.in_top_k(logits, labels, 7)
 
     # Restore the moving average version of the learned variables for eval.
     variable_averages = tf.train.ExponentialMovingAverage(
@@ -156,12 +156,6 @@ def evaluate():
 
 
 def main(argv=None):  # pylint: disable=unused-argument
-  """
-  cifar10.maybe_download_and_extract()
-  if tf.gfile.Exists(FLAGS.eval_dir):
-    tf.gfile.DeleteRecursively(FLAGS.eval_dir)
-  tf.gfile.MakeDirs(FLAGS.eval_dir)
-  """
   evaluate()
 
 

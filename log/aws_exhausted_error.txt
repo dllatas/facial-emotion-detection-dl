@@ -1,0 +1,174 @@
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:431] Bin (256): 	Total Chunks: 0, Chunks in use: 0 0B allocated for chunks. 0B client-requested for chunks. 0B in use in bin. 0B client-requested in use in bin.
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:431] Bin (1024): 	Total Chunks: 2, Chunks in use: 0 1.5KiB allocated for chunks. 8B client-requested for chunks. 0B in use in bin. 0B client-requested in use in bin.
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:431] Bin (2048): 	Total Chunks: 1, Chunks in use: 0 2.0KiB allocated for chunks. 4B client-requested for chunks. 0B in use in bin. 0B client-requested in use in bin.
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:431] Bin (4096): 	Total Chunks: 1, Chunks in use: 0 2.5KiB allocated for chunks. 4B client-requested for chunks. 0B in use in bin. 0B client-requested in use in bin.
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:431] Bin (8192): 	Total Chunks: 0, Chunks in use: 0 0B allocated for chunks. 0B client-requested for chunks. 0B in use in bin. 0B client-requested in use in bin.
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:431] Bin (16384): 	Total Chunks: 0, Chunks in use: 0 0B allocated for chunks. 0B client-requested for chunks. 0B in use in bin. 0B client-requested in use in bin.
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:431] Bin (32768): 	Total Chunks: 0, Chunks in use: 0 0B allocated for chunks. 0B client-requested for chunks. 0B in use in bin. 0B client-requested in use in bin.
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:431] Bin (65536): 	Total Chunks: 0, Chunks in use: 0 0B allocated for chunks. 0B client-requested for chunks. 0B in use in bin. 0B client-requested in use in bin.
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:431] Bin (131072): 	Total Chunks: 0, Chunks in use: 0 0B allocated for chunks. 0B client-requested for chunks. 0B in use in bin. 0B client-requested in use in bin.
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:431] Bin (262144): 	Total Chunks: 0, Chunks in use: 0 0B allocated for chunks. 0B client-requested for chunks. 0B in use in bin. 0B client-requested in use in bin.
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:431] Bin (524288): 	Total Chunks: 1, Chunks in use: 0 288.0KiB allocated for chunks. 256.0KiB client-requested for chunks. 0B in use in bin. 0B client-requested in use in bin.
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:431] Bin (1048576): 	Total Chunks: 0, Chunks in use: 0 0B allocated for chunks. 0B client-requested for chunks. 0B in use in bin. 0B client-requested in use in bin.
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:431] Bin (2097152): 	Total Chunks: 1, Chunks in use: 0 1.88MiB allocated for chunks. 256.0KiB client-requested for chunks. 0B in use in bin. 0B client-requested in use in bin.
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:431] Bin (4194304): 	Total Chunks: 0, Chunks in use: 0 0B allocated for chunks. 0B client-requested for chunks. 0B in use in bin. 0B client-requested in use in bin.
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:431] Bin (8388608): 	Total Chunks: 0, Chunks in use: 0 0B allocated for chunks. 0B client-requested for chunks. 0B in use in bin. 0B client-requested in use in bin.
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:431] Bin (16777216): 	Total Chunks: 0, Chunks in use: 0 0B allocated for chunks. 0B client-requested for chunks. 0B in use in bin. 0B client-requested in use in bin.
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:431] Bin (33554432): 	Total Chunks: 0, Chunks in use: 0 0B allocated for chunks. 0B client-requested for chunks. 0B in use in bin. 0B client-requested in use in bin.
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:431] Bin (67108864): 	Total Chunks: 0, Chunks in use: 0 0B allocated for chunks. 0B client-requested for chunks. 0B in use in bin. 0B client-requested in use in bin.
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:431] Bin (134217728): 	Total Chunks: 0, Chunks in use: 0 0B allocated for chunks. 0B client-requested for chunks. 0B in use in bin. 0B client-requested in use in bin.
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:431] Bin (268435456): 	Total Chunks: 0, Chunks in use: 0 0B allocated for chunks. 0B client-requested for chunks. 0B in use in bin. 0B client-requested in use in bin.
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:431] Bin (536870912): 	Total Chunks: 0, Chunks in use: 0 0B allocated for chunks. 0B client-requested for chunks. 0B in use in bin. 0B client-requested in use in bin.
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:431] Bin (1073741824): 	Total Chunks: 0, Chunks in use: 0 0B allocated for chunks. 0B client-requested for chunks. 0B in use in bin. 0B client-requested in use in bin.
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:431] Bin (2147483648): 	Total Chunks: 0, Chunks in use: 0 0B allocated for chunks. 0B client-requested for chunks. 0B in use in bin. 0B client-requested in use in bin.
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:431] Bin (4294967296): 	Total Chunks: 0, Chunks in use: 0 0B allocated for chunks. 0B client-requested for chunks. 0B in use in bin. 0B client-requested in use in bin.
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:450] Bin for 128.00MiB was 128.00MiB, Chunk State: 
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:465] Chunk at 0x7a3feb100 of size 267673344
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:465] Chunk at 0x766513700 of size 764113152
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:465] Chunk at 0x746513700 of size 536870912
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:465] Chunk at 0x793e13100 of size 268402688
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:465] Chunk at 0x7a3e0b100 of size 1966080
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:465] Chunk at 0x70a3e3700 of size 1007878144
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:465] Chunk at 0x7b4731000 of size 937578496
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:465] Chunk at 0x7b3f31000 of size 8388608
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:465] Chunk at 0x793dcb100 of size 294912
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:465] Chunk at 0x793dca800 of size 2304
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:465] Chunk at 0x7023e2a00 of size 2560
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:465] Chunk at 0x7023e2900 of size 256
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:465] Chunk at 0x7023e2200 of size 256
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:465] Chunk at 0x7023e2100 of size 256
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:465] Chunk at 0x7023e1c00 of size 256
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:465] Chunk at 0x7023e0400 of size 256
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:465] Chunk at 0x7023e0300 of size 256
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:465] Chunk at 0x7023e0200 of size 256
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:465] Chunk at 0x7023e0100 of size 256
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:465] Chunk at 0x7023e0000 of size 256
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:465] Chunk at 0x7023e0a00 of size 256
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:465] Chunk at 0x7023e0b00 of size 256
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:465] Chunk at 0x7023e1400 of size 256
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:465] Chunk at 0x7023e1500 of size 256
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:465] Chunk at 0x7023e3400 of size 256
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:465] Chunk at 0x7023e3600 of size 256
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:465] Chunk at 0x7023e3700 of size 134217728
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:465] Chunk at 0x7023e2000 of size 256
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:465] Chunk at 0x7023e1700 of size 256
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:465] Chunk at 0x7023e0600 of size 256
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:465] Chunk at 0x7023e0700 of size 256
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:465] Chunk at 0x7023e1900 of size 256
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:465] Chunk at 0x7023e1a00 of size 256
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:465] Chunk at 0x7023e2400 of size 256
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:465] Chunk at 0x7023e2500 of size 1024
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:465] Chunk at 0x7023e0c00 of size 2048
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:465] Chunk at 0x7023e0500 of size 256
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:465] Chunk at 0x7023e2300 of size 256
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:465] Chunk at 0x7023e0800 of size 256
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:465] Chunk at 0x7023e0900 of size 256
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:465] Chunk at 0x7023e1d00 of size 256
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:465] Chunk at 0x7023e1e00 of size 512
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:465] Chunk at 0x7023e1b00 of size 256
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:465] Chunk at 0x7023e3500 of size 256
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:465] Chunk at 0x7023e1600 of size 256
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:465] Chunk at 0x7023e1800 of size 256
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:468]      Summary of in-use Chunks by size: 
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:471] 31 Chunks of size 256 totalling 7.8KiB
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:471] 1 Chunks of size 512 totalling 512B
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:471] 1 Chunks of size 1024 totalling 1.0KiB
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:471] 1 Chunks of size 2048 totalling 2.0KiB
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:471] 1 Chunks of size 2304 totalling 2.2KiB
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:471] 1 Chunks of size 2560 totalling 2.5KiB
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:471] 1 Chunks of size 294912 totalling 288.0KiB
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:471] 1 Chunks of size 1966080 totalling 1.88MiB
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:471] 1 Chunks of size 8388608 totalling 8.00MiB
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:471] 1 Chunks of size 134217728 totalling 128.00MiB
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:471] 1 Chunks of size 267673344 totalling 255.27MiB
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:471] 1 Chunks of size 268402688 totalling 255.97MiB
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:471] 1 Chunks of size 536870912 totalling 512.00MiB
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:471] 1 Chunks of size 764113152 totalling 728.71MiB
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:471] 1 Chunks of size 937578496 totalling 894.14MiB
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:471] 1 Chunks of size 1007878144 totalling 961.19MiB
+I tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:475] Sum Total of in-use chunks: 3.66GiB
+W tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:211] Ran out of memory trying to allocate 128.00MiB.  See logs for memory state
+W tensorflow/core/kernels/pooling_ops_common.cc:183] Resource exhausted: OOM when allocating tensor with shape[32,64,128,128]
+W tensorflow/core/common_runtime/executor.cc:1102] 0x2fcf800 Compute status: Resource exhausted: OOM when allocating tensor with shape[32,64,128,128]
+	 [[Node: gradients/pool1_grad/MaxPoolGrad = MaxPoolGrad[ksize=[1, 2, 2, 1], padding="SAME", strides=[1, 2, 2, 1], _device="/job:localhost/replica:0/task:0/gpu:0"](conv1/conv1, pool1, gradients/conv2/Conv2D_grad/tuple/control_dependency)]]
+W tensorflow/core/common_runtime/executor.cc:1102] 0x2ae31f0 Compute status: Resource exhausted: OOM when allocating tensor with shape[32,64,128,128]
+	 [[Node: gradients/pool1_grad/MaxPoolGrad = MaxPoolGrad[ksize=[1, 2, 2, 1], padding="SAME", strides=[1, 2, 2, 1], _device="/job:localhost/replica:0/task:0/gpu:0"](conv1/conv1, pool1, gradients/conv2/Conv2D_grad/tuple/control_dependency)]]
+	 [[Node: gradients/conv1/BiasAdd_grad/tuple/control_dependency_1/_379 = _Recv[client_terminated=false, recv_device="/job:localhost/replica:0/task:0/cpu:0", send_device="/job:localhost/replica:0/task:0/gpu:0", send_device_incarnation=1, tensor_name="edge_986_gradients/conv1/BiasAdd_grad/tuple/control_dependency_1", tensor_type=DT_FLOAT, _device="/job:localhost/replica:0/task:0/cpu:0"]()]]
+W tensorflow/core/common_runtime/executor.cc:1102] 0x2ae31f0 Compute status: Resource exhausted: OOM when allocating tensor with shape[32,64,128,128]
+	 [[Node: gradients/pool1_grad/MaxPoolGrad = MaxPoolGrad[ksize=[1, 2, 2, 1], padding="SAME", strides=[1, 2, 2, 1], _device="/job:localhost/replica:0/task:0/gpu:0"](conv1/conv1, pool1, gradients/conv2/Conv2D_grad/tuple/control_dependency)]]
+	 [[Node: GradientDescent/value/_387 = _Recv[client_terminated=false, recv_device="/job:localhost/replica:0/task:0/cpu:0", send_device="/job:localhost/replica:0/task:0/gpu:0", send_device_incarnation=1, tensor_name="edge_1000_GradientDescent/value", tensor_type=DT_INT32, _device="/job:localhost/replica:0/task:0/cpu:0"]()]]
+W tensorflow/core/common_runtime/executor.cc:1102] 0x2ae31f0 Compute status: Resource exhausted: OOM when allocating tensor with shape[32,64,128,128]
+	 [[Node: gradients/pool1_grad/MaxPoolGrad = MaxPoolGrad[ksize=[1, 2, 2, 1], padding="SAME", strides=[1, 2, 2, 1], _device="/job:localhost/replica:0/task:0/gpu:0"](conv1/conv1, pool1, gradients/conv2/Conv2D_grad/tuple/control_dependency)]]
+	 [[Node: gradients/conv1/Conv2D_grad/tuple/control_dependency_1/_381 = _Recv[client_terminated=false, recv_device="/job:localhost/replica:0/task:0/cpu:0", send_device="/job:localhost/replica:0/task:0/gpu:0", send_device_incarnation=1, tensor_name="edge_989_gradients/conv1/Conv2D_grad/tuple/control_dependency_1", tensor_type=DT_FLOAT, _device="/job:localhost/replica:0/task:0/cpu:0"]()]]
+W tensorflow/core/common_runtime/executor.cc:1102] 0x2fcf800 Compute status: Resource exhausted: OOM when allocating tensor with shape[32,64,128,128]
+	 [[Node: gradients/pool1_grad/MaxPoolGrad = MaxPoolGrad[ksize=[1, 2, 2, 1], padding="SAME", strides=[1, 2, 2, 1], _device="/job:localhost/replica:0/task:0/gpu:0"](conv1/conv1, pool1, gradients/conv2/Conv2D_grad/tuple/control_dependency)]]
+	 [[Node: GradientDescent/_390 = _Recv[client_terminated=false, recv_device="/job:localhost/replica:0/task:0/gpu:0", send_device="/job:localhost/replica:0/task:0/cpu:0", send_device_incarnation=1, tensor_name="edge_1001_GradientDescent", tensor_type=DT_FLOAT, _device="/job:localhost/replica:0/task:0/gpu:0"]()]]
+W tensorflow/core/common_runtime/executor.cc:1102] 0x2fcf800 Compute status: Resource exhausted: OOM when allocating tensor with shape[32,64,128,128]
+	 [[Node: gradients/pool1_grad/MaxPoolGrad = MaxPoolGrad[ksize=[1, 2, 2, 1], padding="SAME", strides=[1, 2, 2, 1], _device="/job:localhost/replica:0/task:0/gpu:0"](conv1/conv1, pool1, gradients/conv2/Conv2D_grad/tuple/control_dependency)]]
+	 [[Node: GradientDescent/update/_384 = _Recv[client_terminated=false, recv_device="/job:localhost/replica:0/task:0/gpu:0", send_device="/job:localhost/replica:0/task:0/cpu:0", send_device_incarnation=1, tensor_name="edge_998_GradientDescent/update", tensor_type=DT_FLOAT, _device="/job:localhost/replica:0/task:0/gpu:0"]()]]
+Traceback (most recent call last):
+  File "cifar10_train.py", line 133, in <module>
+    tf.app.run()
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/platform/default/_app.py", line 30, in run
+    sys.exit(main(sys.argv))
+  File "cifar10_train.py", line 129, in main
+    train()
+  File "cifar10_train.py", line 103, in train
+    _, loss_value = sess.run([train_op, loss])
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/client/session.py", line 315, in run
+    return self._run(None, fetches, feed_dict)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/client/session.py", line 511, in _run
+    feed_dict_string)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/client/session.py", line 564, in _do_run
+    target_list)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/client/session.py", line 586, in _do_call
+    e.code)
+tensorflow.python.framework.errors.ResourceExhaustedError: OOM when allocating tensor with shape[32,64,128,128]
+	 [[Node: gradients/pool1_grad/MaxPoolGrad = MaxPoolGrad[ksize=[1, 2, 2, 1], padding="SAME", strides=[1, 2, 2, 1], _device="/job:localhost/replica:0/task:0/gpu:0"](conv1/conv1, pool1, gradients/conv2/Conv2D_grad/tuple/control_dependency)]]
+	 [[Node: gradients/conv1/BiasAdd_grad/tuple/control_dependency_1/_379 = _Recv[client_terminated=false, recv_device="/job:localhost/replica:0/task:0/cpu:0", send_device="/job:localhost/replica:0/task:0/gpu:0", send_device_incarnation=1, tensor_name="edge_986_gradients/conv1/BiasAdd_grad/tuple/control_dependency_1", tensor_type=DT_FLOAT, _device="/job:localhost/replica:0/task:0/cpu:0"]()]]
+Caused by op u'gradients/pool1_grad/MaxPoolGrad', defined at:
+  File "cifar10_train.py", line 133, in <module>
+    tf.app.run()
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/platform/default/_app.py", line 30, in run
+    sys.exit(main(sys.argv))
+  File "cifar10_train.py", line 129, in main
+    train()
+  File "cifar10_train.py", line 78, in train
+    train_op = cifar10.train(loss, global_step)
+  File "/home/ubuntu/dl/code/cifar10.py", line 325, in train
+    grads = opt.compute_gradients(total_loss)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/training/optimizer.py", line 241, in compute_gradients
+    colocate_gradients_with_ops=colocate_gradients_with_ops)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/ops/gradients.py", line 483, in gradients
+    in_grads = _AsList(grad_fn(wrapped_op, *out_grads))
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/ops/nn_grad.py", line 206, in _MaxPoolGrad
+    padding=op.get_attr("padding"))
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/ops/gen_nn_ops.py", line 475, in _max_pool_grad
+    strides=strides, padding=padding, name=name)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/ops/op_def_library.py", line 655, in apply_op
+    op_def=op_def)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/framework/ops.py", line 2040, in create_op
+    original_op=self._default_original_op, op_def=op_def)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/framework/ops.py", line 1087, in __init__
+    self._traceback = _extract_stack()
+
+...which was originally created as op u'pool1', defined at:
+  File "cifar10_train.py", line 133, in <module>
+    tf.app.run()
+[elided 1 identical lines from previous traceback]
+  File "cifar10_train.py", line 129, in main
+    train()
+  File "cifar10_train.py", line 71, in train
+    logits = cifar10.inference(images)
+  File "/home/ubuntu/dl/code/cifar10.py", line 197, in inference
+    strides=[1, 2, 2, 1], padding='SAME', name='pool1')
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/ops/nn_ops.py", line 297, in max_pool
+    name=name)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/ops/gen_nn_ops.py", line 449, in _max_pool
+    strides=strides, padding=padding, name=name)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/ops/op_def_library.py", line 655, in apply_op
+    op_def=op_def)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/framework/ops.py", line 2040, in create_op
+    original_op=self._default_original_op, op_def=op_def)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/framework/ops.py", line 1087, in __init__
+    self._traceback = _extract_stack()

@@ -95,7 +95,6 @@ def train():
     
     # Start the queue runners.
     tf.train.start_queue_runners(sess=sess)
-
     summary_writer = tf.train.SummaryWriter(FLAGS.train_dir,
                                             graph_def=sess.graph_def)
 
@@ -106,7 +105,7 @@ def train():
 
       assert not np.isnan(loss_value), 'Model diverged with loss = NaN'
 
-      if step % 1 == 0:
+      if step % 5 == 0:
         num_examples_per_step = FLAGS.batch_size
         examples_per_sec = num_examples_per_step / duration
         sec_per_batch = float(duration)
