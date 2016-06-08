@@ -54,40 +54,39 @@ def generate_bin(path, total_images, record_size, label_dict, home_path):
 		for name in files:
 			label = search_label_dictionary(label_dict, name)
 			if label is not None:
-				#print "Label found was: " + str(label)
-				label_found.append(label)
-				"""
+				print "Label found was: " + str(label)
+				#label_found.append(label)
 				image = Image.open(os.path.join(root, name))
 				image_modifed = np.array(image)
 				grey = image_modifed[:].flatten()
 				result[i] = np.array(list([label]) + list(grey), np.uint8)
 				i = i + 1
-				"""
 			else:
 				print "Label was not found for :" + name
-	# result.tofile(home_path)
-	unique_label = set(label_found)
-	print unique_label
+	result.tofile(home_path)
+	#unique_label = set(label_found)
+	#print unique_label
 
 def main(argv=None):  # pylint: disable=unused-argument
 	label_path = "/home/neo/projects/deepLearning/data/label/"
 	#image_path = "/home/neo/projects/deepLearning/data/image/"
-	image_path = "/home/neo/projects/deepLearning/data/resize_faces/"
-	home_path = "/home/neo/projects/deepLearning/data/ck.bin"
+	image_path = "/home/neo/projects/deepLearning/data/resize_faces_seq_10/"
+	home_path = "/home/neo/projects/deepLearning/data/ck_24.bin"
 	#total_images = 4895
 	#total_images = 327
-	total_images = 1538
+	total_images = 3064
 	#witdh = 640
 	#height = 480
-	witdh = 32
-	height = 32
+	witdh = 64
+	height = 64
 	channel = 1
 	label = 1
 	operation = 1
 	#convert_to_grayscale(image_path)
-	label_dict = generate_label_dictionary(label_path, operation)
+	#label_dict = generate_label_dictionary(label_path, operation)
 	record_size = set_record_size(label, witdh, height, channel)
-	generate_bin(image_path, total_images, record_size, label_dict, home_path)
+	print record_size
+	#generate_bin(image_path, total_images, record_size, label_dict, home_path)
 
 	
 if __name__ == '__main__':

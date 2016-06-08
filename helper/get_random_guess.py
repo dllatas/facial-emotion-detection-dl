@@ -33,8 +33,8 @@ def get_label_dict(path):
 	
 def main(argv=None):  # pylint: disable=unused-argument
 	label_path = "/home/neo/projects/deepLearning/data/label/"
-	labels = [1,2,3,4,5,6,7]
-	label = 7
+	labels = [1,2,3,4,5,6]
+	label = 6
 	steps = 1000
 	result = []
 	for i in xrange(steps):

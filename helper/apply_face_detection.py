@@ -6,8 +6,8 @@ import cv2
 def save_image(image, dest_path, filename):
 	cv2.imwrite(os.path.join(dest_path, filename), image)
 
-def check_number_faces_detected(face, borderline, filename):
-	if len(face) != borderline:
+def check_number_faces_detected(face, faces_to_detect, filename):
+	if len(face) != faces_to_detect:
 		print "Faces found: " + str(len(face)) + " on file " + filename
 
 def show_image(image, header="faces"):
@@ -30,20 +30,21 @@ def get_face(filename, face_cascade):
 	face = face_cascade.detectMultiScale(gray, scaleFactor=1.2, minNeighbors=7, minSize=(70, 70))
 	return face, image
 
-def get_images(path, face_cascade, dest_path, borderline):
+def get_images(path, face_cascade, dest_path, faces_to_detect):
 	for root, dirs, files in os.walk(path, True):
 		for name in files:
 			face = get_face(os.path.join(root, name), face_cascade)
-			check_number_faces_detected(face[0], borderline, os.path.join(root, name))
+			check_number_faces_detected(face[0], faces_to_detect, os.path.join(root, name))
 			image = crop_image(face[0], face[1])
 			save_image(image, dest_path, name)
 			
 def main(argv=None):  # pylint: disable=unused-argument
 	face_cascade = cv2.CascadeClassifier("/home/neo/opencv-3.1.0/data/haarcascades/haarcascade_frontalface_default.xml")
-	image_path = "/home/neo/projects/deepLearning/data/image_exp2/"
-	dest_path = "/home/neo/projects/deepLearning/data/crop_faces/"
-	borderline = 1
-	get_images(image_path, face_cascade, dest_path, borderline)
+	#image_path = "/home/neo/projects/deepLearning/data/image_exp2/"
+	image_path = "/home/neo/projects/deepLearning/data/ck_image_seq_10"
+	dest_path = "/home/neo/projects/deepLearning/data/crop_faces_seq_10/"
+	faces_to_detect = 1
+	get_images(image_path, face_cascade, dest_path, faces_to_detect)
 
 if __name__ == '__main__':
 	main()

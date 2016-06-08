@@ -2,6 +2,10 @@ import os
 import collections
 
 # Get the last x images from all the sequences
+# 4895 labeled images; excluding 1 to 3 per sequence 
+# 3064 labeled images; excluding 1 to 3 per sequence; 10 last images; (62%)
+# 1538 labeled images; excluding 1 to 3 per sequence; 5 last images; (31%)
+
 
 def move_image_sequences(path, sequences_to_move, dest_path):
 	for root, dirs, files in os.walk(path, True):
@@ -40,8 +44,8 @@ def generate_sequence_dictionary(label_path, scope, image_value_length, file_for
 def main(argv=None):  # pylint: disable=unused-argument
 	label_path = "/home/neo/projects/deepLearning/data/label/"
 	image_path = "/home/neo/projects/deepLearning/data/image/"
-	dest_path = "/home/neo/projects/deepLearning/data/image_exp2/"
-	scope = 5
+	dest_path = "/home/neo/projects/deepLearning/data/ck_image_seq_10/"
+	scope = 10
 	image_value_length = 8
 	file_format = ".png"
 	sequence_dict = generate_sequence_dictionary(label_path, scope, image_value_length, file_format)

@@ -1,43 +1,78 @@
-ssh -i "facemotion.pem" ubuntu@ec2-54-237-217-14.compute-1.amazonaws.com
+Replace: ec2-52-90-148-42.compute-1.amazonaws.com
+With: ec2-52-90-148-42.compute-1.amazonaws.com
 
-ec2-54-237-217-14.compute-1.amazonaws.com
-
-scp -i facemotion.pem bazel-0.2.3-installer-linux-x86_64.sh ubuntu@ec2-52-201-236-80.compute-1.amazonaws.com:~/
-scp -i facemotion.pem cudnn-6.5-linux-x64-v2.tgz ubuntu@ec2-52-91-159-208.compute-1.amazonaws.com:~/
-scp -i facemotion.pem bazel-0.1.4-installer-linux-x86_64.sh ubuntu@ec2-52-91-159-208.compute-1.amazonaws.com:~/
-
-echo debconf shared/accepted-oracle-license-v1-1 select true | sudo debconf-set-selections
-echo debconf shared/accepted-oracle-license-v1-1 seen true | sudo debconf-set-selections
-sudo apt-get install -y oracle-java8-installer
-
-/home/ubuntu/bin/bazel build -c opt --config=cuda //tensorflow/cc:tutorials_example_trainer
-https://github.com/bazelbuild/bazel/releases/download/0.1.4/bazel-0.1.4-installer-linux-x86_64.sh
-
-sudo apt-get install pkg-config zip g++ zlib1g-dev https://github.com/bazelbuild/bazel/releases/download/0.1.4/bazel-0.1.4-installer-linux-x86_64.sh
-
-$ bazel build -c opt –config=cuda //tensorflow/core/distributed_runtime/rpc:grpc_tensorflow_server
+======================================
+Login credentials
+======================================
+ssh -i "/home/neo/Downloads/facemotion.pem" ubuntu@ec2-52-90-148-42.compute-1.amazonaws.com
 
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda-7.0/lib64"
 export CUDA_HOME=/usr/local/cuda
 
-ssh -i "/home/neo/Downloads/facemotion.pem" ubuntu@ec2-54-237-217-14.compute-1.amazonaws.com
-
-scp -i "/home/neo/Downloads/facemotion.pem" -r /home/neo/projects/deepLearning/data ubuntu@ec2-54-237-217-14.compute-1.amazonaws.com:~/dl
-scp -i "/home/neo/Downloads/facemotion.pem" /home/neo/projects/deepLearning/data/kh.bin ubuntu@ec2-54-237-217-14.compute-1.amazonaws.com:~/dl/data
-scp -i "/home/neo/Downloads/facemotion.pem" /home/neo/projects/deepLearning/aws_dl/cifar10_input.py ubuntu@ec2-54-237-217-14.compute-1.amazonaws.com:~/dl/code
-scp -i "/home/neo/Downloads/facemotion.pem" /home/neo/projects/deepLearning/aws_dl/cifar10_train.py ubuntu@ec2-54-237-217-14.compute-1.amazonaws.com:~/dl/code
-scp -i "/home/neo/Downloads/facemotion.pem" /home/neo/projects/deepLearning/aws_dl/cifar10.py ubuntu@ec2-54-237-217-14.compute-1.amazonaws.com:~/dl/code
-
-scp -i "/home/neo/Downloads/facemotion.pem" ubuntu@ec2-54-237-217-14.compute-1.amazonaws.com:/tmp/cifar10_train/checkpoint /home/neo/projects/deepLearning
-scp -i "/home/neo/Downloads/facemotion.pem" ubuntu@ec2-54-237-217-14.compute-1.amazonaws.com:/tmp/cifar10_train/model.ckpt-10000 /home/neo/projects/deepLearning
-scp -i "/home/neo/Downloads/facemotion.pem" ubuntu@ec2-54-237-217-14.compute-1.amazonaws.com:/tmp/cifar10_train/model.ckpt-20000 /home/neo/projects/deepLearning
-scp -i "/home/neo/Downloads/facemotion.pem" ubuntu@ec2-54-237-217-14.compute-1.amazonaws.com:/tmp/cifar10_train/model.ckpt-30000 /home/neo/projects/deepLearning
-
-10 000 steps = 19.4 %
-20 000 steps = 21.9 %; Top-3 29.1%; Top-4 52.8%; Top-5 75.9%
+======================================
+Copy code files from desktop to server 
+======================================
+scp -i "/home/neo/Downloads/facemotion.pem" /home/neo/projects/deepLearning/data/ck.bin ubuntu@ec2-52-90-148-42.compute-1.amazonaws.com:~/dl/data
 
 
--rw-rw-r-- 1 ubuntu ubuntu 1086210934 May 26 11:53 model.ckpt-0
--rw-rw-r-- 1 ubuntu ubuntu 1086210936 May 27 13:01 model.ckpt-30000
+scp -i "/home/neo/Downloads/facemotion.pem" /home/neo/projects/deepLearning/aws/cifar10_input.py ubuntu@ec2-52-90-148-42.compute-1.amazonaws.com:~/dl/code
+scp -i "/home/neo/Downloads/facemotion.pem" /home/neo/projects/deepLearning/aws/cifar10_train.py ubuntu@ec2-52-90-148-42.compute-1.amazonaws.com:~/dl/code
+scp -i "/home/neo/Downloads/facemotion.pem" /home/neo/projects/deepLearning/aws/cifar10.py ubuntu@ec2-52-90-148-42.compute-1.amazonaws.com:~/dl/code
 
-25 horas y 8 minutos
+=====================================
+Copy log files from server to desktop
+=====================================
+scp -i "/home/neo/Downloads/facemotion.pem" -r ubuntu@ec2-52-90-148-42.compute-1.amazonaws.com:/tmp/cifar10_train/ /home/neo/projects/deepLearning
+
+
+
+
+
+chmod +x test.py
+nohup /path/to/test.py &
+ps ax | grep test.py
+
+watch -n 5 free -e
+
+
+256 epochs
+
+1040 epoch = 50 000 batch/step
+312 epoch = 15 000 batch/step
+208 epoch = 10 000 batch/step
+
+150 epoch = 7200 batch/step
+100 epoch = 4800 batch/step
+50 epoch  = 2400 batch/step
+1 epoch   =   48 batch/step = 1538 images
+1 batch/step = 32 images
+
+5,6 minutes per  1 000 epochs
+280 minutes per 50 000 epochs
+280 minutes is 4 hours and 40 minutes
+
+20 000: 0.753, 0.725, 0.719, 0.728
+25 000: 0.744, 0.725, 0.734, 0.738, 0.716
+35 000: 0.734, 0.731, 0.738, 0.728, 0.728
+50 000: 0.75, 0.738, 0.734
+
+new topology 
+5000: 0.728 - 0.759 - 0.722 - 0.713 - 0.725 - 0.747
+10000: 0.709 - 0.719
+15000: 0.744 - 68.8 - 0.703 - 0.762 - 0.700
+
+adding a FCL
+5000: 0.706, 0.713, 0.713, 0.709
+
+150 epoch = 7200 batch/step
+100 epoch = 4800 batch/step
+50 epoch  = 2400 batch/step
+
+50 epoch  =  1200 batch/step
+10 epoch  =  240  batch/step
+1 epoch   =   24  batch/step = 1538 images
+1 batch/step = 64 images
+
+
+0.598
+0.714

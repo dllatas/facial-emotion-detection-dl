@@ -51,7 +51,8 @@ import cifar10_input
 FLAGS = tf.app.flags.FLAGS
 
 # Basic model parameters.
-tf.app.flags.DEFINE_integer('batch_size', 32,
+#
+tf.app.flags.DEFINE_integer('batch_size', 64,
                             """Number of images to process in a batch.""")
 tf.app.flags.DEFINE_string('data_dir', '/tmp/cifar10_data',
                            """Path to the CIFAR-10 data directory.""")
@@ -65,9 +66,12 @@ NUM_EXAMPLES_PER_EPOCH_FOR_EVAL = cifar10_input.NUM_EXAMPLES_PER_EPOCH_FOR_EVAL
 
 # Constants describing the training process.
 MOVING_AVERAGE_DECAY = 0.9999     # The decay to use for the moving average.
-NUM_EPOCHS_PER_DECAY = 208.0      # Epochs after which learning rate decays.
-LEARNING_RATE_DECAY_FACTOR = 0.01  # Learning rate decay factor.
+NUM_EPOCHS_PER_DECAY = 312.0      # Epochs after which learning rate decays.
+LEARNING_RATE_DECAY_FACTOR = 0.1  # Learning rate decay factor.
 INITIAL_LEARNING_RATE = 0.1       # Initial learning rate.
+
+DROPOUT = 0.99
+MOMENTUM = 0.9
 
 # If a model is trained with multiple GPU's prefix all Op names with tower_name
 # to differentiate the operations. Note that this prefix is removed from the
@@ -191,47 +195,47 @@ def inference(images, eval=False):
     conv1 = tf.nn.relu(bias, name=scope.name)
     _activation_summary(conv1)
 
-  pool1 = tf.nn.max_pool(conv1, ksize=[1, 2, 2, 1],
+  pool1 = tf.nn.max_pool(conv1, ksize=[1, 3, 3, 1],
                          strides=[1, 2, 2, 1], padding='SAME', name='pool1')
 
-  with tf.variable_scope('conv2') as scope:
-    kernel = _variable_with_weight_decay('weights', shape=[3, 3, 64, 128],
-                                         stddev=1e-4, wd=0.0)
-    conv = tf.nn.conv2d(pool1, kernel, [1, 1, 1, 1], padding='SAME')
-    biases = _variable_on_cpu('biases', [128], tf.constant_initializer(0.1))
-    bias = tf.nn.bias_add(conv, biases)
-    conv2 = tf.nn.relu(bias, name=scope.name)
-    _activation_summary(conv2)
-
-  pool2 = tf.nn.max_pool(conv2, ksize=[1, 2, 2, 1],
-                         strides=[1, 2, 2, 1], padding='SAME', name='pool2')
-
-  # local3
+  # local1
   with tf.variable_scope('local1') as scope:
     # Move everything into depth so we can perform a single matrix multiply.
     dim = 1
-    for d in pool2.get_shape()[1:].as_list():
+    for d in pool1.get_shape()[1:].as_list():
       dim *= d
-    reshape = tf.reshape(pool2, [FLAGS.batch_size, dim])
-    weights = _variable_with_weight_decay('weights', shape=[dim, 256],
+    reshape = tf.reshape(pool1, [FLAGS.batch_size, dim])
+    weights = _variable_with_weight_decay('weights', shape=[dim, 384],
                                           stddev=0.04, wd=0.004)
-    biases = _variable_on_cpu('biases', [256], tf.constant_initializer(0.1))
+    biases = _variable_on_cpu('biases', [384], tf.constant_initializer(0.1))
     local1 = tf.nn.relu(tf.matmul(reshape, weights) + biases, name=scope.name)
     _activation_summary(local1)
     if eval is False:
-      local_drop_1 = tf.nn.dropout(local1, 0.7)
-      _activation_summary(local_drop_1)
+      local_drop1 = tf.nn.dropout(local1, DROPOUT)
+      _activation_summary(local_drop1)
+
+  # local2
+  with tf.variable_scope('local2') as scope:
+    weights = _variable_with_weight_decay('weights', shape=[384, 192],
+                                          stddev=0.04, wd=0.004)
+    biases = _variable_on_cpu('biases', [192], tf.constant_initializer(0.1))
+    if eval is False:
+      local_drop2 = tf.nn.dropout(tf.nn.relu(tf.matmul(local_drop1, weights) + biases, name=scope.name), DROPOUT)
+      _activation_summary(local_drop2)
+    else:
+      local2 = tf.nn.relu(tf.matmul(local1, weights) + biases, name=scope.name)
+      _activation_summary(local2)
 
   # softmax, i.e. softmax(WX + b)
   with tf.variable_scope('softmax_linear') as scope:
-    weights = _variable_with_weight_decay('weights', [256, NUM_CLASSES],
+    weights = _variable_with_weight_decay('weights', [192, NUM_CLASSES],
                                           stddev=1/192.0, wd=0.0)
     biases = _variable_on_cpu('biases', [NUM_CLASSES],
                               tf.constant_initializer(0.0))
     if eval is False:
-      softmax_linear = tf.nn.softmax(tf.matmul(local_drop_1, weights) + biases, name=scope.name)
+      softmax_linear = tf.nn.softmax(tf.matmul(local_drop2, weights) + biases, name=scope.name)
     else:
-      softmax_linear = tf.nn.softmax(tf.matmul(local1, weights) + biases, name=scope.name)
+      softmax_linear = tf.nn.softmax(tf.matmul(local2, weights) + biases, name=scope.name)
     _activation_summary(softmax_linear)
 
   return softmax_linear
@@ -318,7 +322,12 @@ def train(total_loss, global_step):
 
   # Compute gradients.
   with tf.control_dependencies([loss_averages_op]):
-    opt = tf.train.GradientDescentOptimizer(lr)
+    #opt = tf.train.GradientDescentOptimizer(lr)
+    opt = tf.train.MomentumOptimizer(lr, MOMENTUM)
+    #opt = tf.train.AdamOptimizer()
+    #opt = tf.train.AdagradOptimizer(lr)
+    #opt = tf.train.FtrlOptimizer(lr)
+    #opt = tf.train.RMSPropOptimizer(lr)
     grads = opt.compute_gradients(total_loss)
 
   # Apply gradients.
@@ -342,4 +351,3 @@ def train(total_loss, global_step):
     train_op = tf.no_op(name='train')
 
   return train_op
-
