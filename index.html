@@ -1,1 +1,78 @@
-Hello World
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Facial emotion detection using Deep Learning">
+        <meta name="author" content="Daniel Llatas Spiers">
+        <link rel="icon" href="/dist/favicon.ico">
+        <title>Facial emotion detection using Deep Learning</title>
+        <link href="./dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="./dist/css/blog.css" rel="stylesheet">
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <!--<div class="blog-masthead">
+            <div class="container">
+                <nav class="blog-nav">
+                <a class="blog-nav-item active" href="#">Home</a>
+                <a class="blog-nav-item" href="#">New features</a>
+                </nav>
+            </div>
+        </div>-->
+
+        <div class="container">
+            <div class="blog-header">
+                <h1 class="blog-title">Facial emotion detection using deep learning</h1>
+                <p class="lead blog-description">Facial emotion recognition without the use of features</p>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-8 blog-main">
+                <div class="blog-post">
+                    <h2 class="blog-post-title">Abstract</h2>
+                    <p class="blog-post-meta">August 23, 2016</p>
+                    <p>The use of machines to perform different tasks is constantly increasing in society. Providing machines with perception can lead them to perform a great variety of tasks; even very complex ones such as elderly care. Machine perception requires that machines understand about their environment and interlocutor’s intention. Recognizing facial emotions might help in this regard. During the development of this work, deep learning techniques have been used over images displaying the following facial emotions: <em>happiness, sadness, anger, surprise, disgust, and fear.</em></p>
+                    <hr>
+                    <blockquote>
+                        <p><strong>Machine perception</strong> requires that machines understand about their environment and interlocutor’s intention.</p>
+                    </blockquote>
+                    <p>In this research, a pure convolutional neural network approach outperformed other statistical methods' results achieved by other authors that include feature engineering. Utilizing convolutional networks involves feature learning; which sounds very promising for this task where defining features is not trivial. Moreover, the network was evaluated using two different corpora: one was employed during network's training and it was also helpful for parameter tuning and for network's architecture definition. This corpus consisted of facial acted emotions. The network providing best classification accuracy results was tested against the second dataset. Even though the network was trained using only one corpus; the network reported auspicious results when tested on a different dataset, which displayed facial non-acted emotions. While the results achieved were not state-of-the-art; the evidence gathered points out deep learning might be suitable to classify facial emotion expressions. Thus, deep learning has the potential to improve human-machine interaction because its ability to learn features will allow machines to develop perception. And by having perception, machines will potentially provide smoother responses, drastically improving the user experience.</p>
+                </div><!-- /.blog-post -->
+            <!--<nav>
+                <ul class="pager">
+                    <li><a href="#">Previous</a></li>
+                    <li><a href="#">Next</a></li>
+                </ul>
+            </nav>-->
+
+        </div><!-- /.blog-main -->
+            <div class="col-lg-3 col-sm-offset-1 blog-sidebar">
+                <div class="sidebar-module sidebar-module-inset">
+                    <h4>About</h4>
+                    <p>Daniel Llatas Spiers is a <em>machine learning practitioner</em>. Find more about him <a href="https://dllatas.github.io" target="_blank">here.</a></p>
+                </div>
+                <!--<div class="sidebar-module">
+                    <h4>Archives</h4>
+                    <ol class="list-unstyled">
+                        <li><a href="#">March 2014</a></li>
+                        <li><a href="#">February 2014</a></li>
+                    </ol>
+                </div>-->
+            </div><!-- /.blog-sidebar -->
+        </div><!-- /.row -->
+
+        </div><!-- /.container -->
+
+        <footer class="blog-footer">
+            <a href="#">Back to top</a>
+        </footer>
+        <script src="./dist/js/jquery.min.js"></script>
+        <script src="./dist/js/bootstrap.min.js"></script>
+    </body>
+</html>
