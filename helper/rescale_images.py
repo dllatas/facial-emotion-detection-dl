@@ -42,10 +42,11 @@ def resize_image(path, filename, dimension):
 	return resized
 
 def main(argv=None):  # pylint: disable=unused-argument
-	image_path = "/home/neo/projects/deepLearning/data/crop_faces_seq_10/"
-	dest_path = "/home/neo/projects/deepLearning/data/resize_faces_seq_10"
-	name = "S005_001_00000007.png"
-	dimension = 24
+	#image_path = "/home/neo/projects/deepLearning/data/crop_faces_seq_10/"
+	image_path = "/home/neo/projects/deepLearning/data/amfed_faces"
+	dest_path = "/home/neo/projects/deepLearning/data/amfed_faces2"
+	#name = "S005_001_00000007.png"
+	dimension = 32
 	resize_multiple_images(image_path, dest_path, dimension)
 	#resize_single_image(image_path, name, dest_path, dimension)
 	#get_image_mean(dest_path)

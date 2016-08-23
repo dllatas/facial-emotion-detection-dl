@@ -40,7 +40,8 @@ NUM_EXAMPLES_PER_EPOCH_FOR_EVAL = 320
 
 PATH = "/home/neo/projects/deepLearning/data/"
 #PATH = "/home/ubuntu/dl/data/"
-FILENAME = 'ck.bin'
+TRAIN_FILENAME = "ck.bin"
+EVAL_FILENAME = "amfed_happy.bin"
 
 
 def read_cifar10(filename_queue):
@@ -139,7 +140,7 @@ def distorted_inputs(data_dir, batch_size):
     images: Images. 4D tensor of [batch_size, IMAGE_SIZE, IMAGE_SIZE, 3] size.
     labels: Labels. 1D tensor of [batch_size] size.
   """
-  filenames = [os.path.join(PATH, FILENAME)]
+  filenames = [os.path.join(PATH, TRAIN_FILENAME)]
   # Create a queue that produces the filenames to read.
   filename_queue = tf.train.string_input_producer(filenames)
   # Read examples from files in the filename queue.
@@ -178,7 +179,7 @@ def inputs(eval_data, data_dir, batch_size):
     images: Images. 4D tensor of [batch_size, IMAGE_SIZE, IMAGE_SIZE, 3] size.
     labels: Labels. 1D tensor of [batch_size] size.
   """
-  filenames = [os.path.join(PATH, FILENAME)]
+  filenames = [os.path.join(PATH, EVAL_FILENAME)]
   # Create a queue that produces the filenames to read.
   filename_queue = tf.train.string_input_producer(filenames)
   # Read examples from files in the filename queue.

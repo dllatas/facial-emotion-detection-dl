@@ -76,3 +76,12 @@ adding a FCL
 
 0.598
 0.714
+
+1 batch/step = 64 images
+1 epoch = 3064 images = 48 batch/step
+19 epochs = 57450 images = 900 batch/step
+
+
+TOP 1: 0.7, 0.711, 0.725, 0.708, 0.681, 0.719, 0.711, 0.713, 0.684, 0.702
+
+
